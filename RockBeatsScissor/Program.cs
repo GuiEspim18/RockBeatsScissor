@@ -1,13 +1,26 @@
 ﻿// See https://aka.ms/new-console-template for more information
+Dictionary<string, (int, int, int)> statitics = new();
+
 void Welcome() {
-    string name = GetName();
-    Console.WriteLine($"Olá {name}, vamos jogar pedra papel e tesoura? Mas diferente?");
+    Console.WriteLine($"--Pedra, Papel e Tesoura--");
     int option = ChooseOptions(new string[]{
         "Como Jogar",
         "Jogar Agora",
+        "Adicionar Usuário",
         "Estatísticas"
     });
-    Console.WriteLine(option);
+    Choice(option);
+}
+
+void Choice(int option) {
+    switch (option) {
+        case 1: Console.WriteLine(""); break;
+    }
+}
+
+void AddUser() {
+    string name = GetName();
+    statitics.Add(name, (0, 0, 0));
 }
 
 int ChooseOptions(string[] validOptions) {
