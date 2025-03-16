@@ -7,19 +7,19 @@ void Welcome() {
         "Jogar Agora",
         "Estatísticas"
     });
+    Console.WriteLine(option);
 }
 
 int ChooseOptions(string[] validOptions) {
     Dictionary<int, string> options = new();
     int number = 0;
-    bool valid = false;
     foreach (string opt in validOptions) {
         options.Add(number++, opt);
         Console.WriteLine($"({number}) {opt}");
     }
     Console.WriteLine("Escolha uma opção:");
     string? option = Console.ReadKey().KeyChar.ToString();
-    valid = ValidateOpt(option, number);
+    bool valid = ValidateOpt(option, number);
     while (!valid) {
         Console.WriteLine("\nOpção inválida:");
         option = Console.ReadKey().KeyChar.ToString();
