@@ -1,0 +1,15 @@
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/bin/Debug/net7.0/RockBeatsScissor
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/bin/Debug/net7.0/RockBeatsScissor.deps.json
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/bin/Debug/net7.0/RockBeatsScissor.runtimeconfig.json
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/bin/Debug/net7.0/RockBeatsScissor.dll
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/bin/Debug/net7.0/RockBeatsScissor.pdb
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.csproj.AssemblyReference.cache
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.GeneratedMSBuildEditorConfig.editorconfig
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.AssemblyInfoInputs.cache
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.AssemblyInfo.cs
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.csproj.CoreCompileInputs.cache
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.dll
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/refint/RockBeatsScissor.dll
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.pdb
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.genruntimeconfig.cache
+/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/ref/RockBeatsScissor.dll
