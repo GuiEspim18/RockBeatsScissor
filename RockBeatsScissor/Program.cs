@@ -7,19 +7,36 @@ void Welcome() {
         "Como Jogar",
         "Jogar Agora",
         "Adicionar Usuário",
-        "Estatísticas"
+        "Estatísticas", 
+        "Sair"
     });
     Choice(option);
+}
+
+void Play() {
+    if (statitics.Count == 0) {
+        AddUser();
+    }
+    Console.WriteLine("Vamos jogar");
 }
 
 void Choice(int option) {
     switch (option) {
         case 1: Console.WriteLine(""); break;
+        case 2: Console.WriteLine(""); break;
+        case 3: AddUser(); break;
+        case 4: Console.WriteLine(""); break;
+        case 5: Console.WriteLine(""); break;
     }
 }
 
 void AddUser() {
+    Console.WriteLine("Digite o seu nome:");
     string name = GetName();
+    while (statitics.ContainsKey(name)) {
+        Console.WriteLine("Este usuário já foi adicionado!");
+        name = GetName();
+    }
     statitics.Add(name, (0, 0, 0));
 }
 
