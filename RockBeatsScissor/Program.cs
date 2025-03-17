@@ -56,7 +56,6 @@ void Play()
         AddUser();
     }
 
-
     // Escolhendo um usuário para jogar
     ChooseUser();
 
@@ -66,68 +65,64 @@ void Play()
     Console.WriteLine("Mão 2:");
     int secondHand = ChooseOptions(gameOptions);
 
-    // Guardando as opções em um array
-    Dictionary<string, int> playerOptions = new Dictionary<string, int>
+    // Guardando as opções em um dicionário para facilitar o acesso
+    var playerOptions = new Dictionary<int, string>
     {
-        {gameOptions[firstHand - 1], firstHand},
-        {gameOptions[secondHand - 1], secondHand}
+        { 1, gameOptions[firstHand - 1] },
+        { 2, gameOptions[secondHand - 1] }
     };
 
-    // Escolhendo as opções da mão 1 e 2 do programa
-    int pcFirstHand = new Random().Next(3);
-    int pcSecondHand = new Random().Next(3);
+    // Escolhendo as opções da mão 1 e 2 do programa (computador)
+    Random rand = new Random();
+    int pcFirstHand = rand.Next(gameOptions.Length); // Indice aleatório entre 0 e 2
+    int pcSecondHand = rand.Next(gameOptions.Length); // Indice aleatório entre 0 e 2
 
-    // Guardando as opções do programa em um array
-    Dictionary<string, int> pcOptions = new Dictionary<string, int>
+    var pcOptions = new Dictionary<int, string>
     {
-        {gameOptions[pcFirstHand], pcFirstHand + 1},
-        {gameOptions[pcSecondHand], pcSecondHand + 1}
+        { 1, gameOptions[pcFirstHand] },
+        { 2, gameOptions[pcSecondHand] }
     };
 
-    // Mostrando as opções das mãos 1 e 2 do programa e do jogador
-    ShowOptions(playerOptions.Keys.ToArray());
-    ShowOptions(pcOptions.Keys.ToArray(), true);
+    // Mostrando as opções das mãos 1 e 2 do jogador e do computador
+    ShowOptions(playerOptions.Values.ToArray());
+    ShowOptions(pcOptions.Values.ToArray(), true);
 
     // Escolhendo a melhor opção para ganhar do programa
     Console.WriteLine("Escolha a sua melhor opção para ganhar de mim!");
-    int choice = ChooseOptions(playerOptions.Keys.ToArray());
+    int choice = ChooseOptions(playerOptions.Values.ToArray());
 
     // Fazendo o programa escolher a melhor opção para ganhar do jogador
     int pcChoice = PcAvaliationOptions(playerOptions, pcOptions);
 
-    Console.WriteLine(playerOptions.FirstOrDefault(x => x.Value == choice).Key);
-    // Console.WriteLine(pcOptions.FirstOrDefault(x => x.Value == pcChoice).Key);
-    Console.WriteLine(pcChoice);
+    string choiceName = playerOptions[choice];
+    Console.WriteLine("Computador escolheu: " + pcOptions[pcChoice]);
 }
 
-int PcAvaliationOptions(Dictionary<string, int> playerOptions, Dictionary<string, int> pcOptions)
+int PcAvaliationOptions(Dictionary<int, string> playerOptions, Dictionary<int, string> pcOptions)
 {
-    Dictionary<string, string> rules = new Dictionary<string, string>
+    // Regras do jogo: o que cada opção derrota
+    var rules = new Dictionary<string, string>
     {
-        { "Pedra", "Tesoura"},
-        { "Papel", "Pedra"},
-        { "Tesoura", "Papel"}
+        { "Pedra", "Tesoura" },
+        { "Papel", "Pedra" },
+        { "Tesoura", "Papel" }
     };
-    foreach (string pcOption in pcOptions.Keys)
+
+    // Verificar se o computador tem uma opção que vença a do jogador
+    foreach (var pcOption in pcOptions.Values)
     {
-        foreach (string playerOption in playerOptions.Keys)
+        foreach (var playerOption in playerOptions.Values)
         {
             if (rules[pcOption] == playerOption)
             {
-                return pcOptions[pcOption];
+                // Se o computador vencer, retorna a opção
+                return pcOptions.FirstOrDefault(option => option.Value == pcOption).Key;
             }
         }
     }
 
-    foreach (string pcOption in pcOptions.Keys)
-    {
-        if (playerOptions.ContainsKey(pcOption))
-        {
-            return pcOptions[pcOption];
-        }
-    }
-    return new Random().Next(2);
-
+    // Se não houver uma vitória clara, o computador escolhe aleatoriamente
+    return pcOptions.Keys.ElementAt(new Random().Next(pcOptions.Count));
 }
 
 void ShowOptions(string[] options, bool pc = false)
