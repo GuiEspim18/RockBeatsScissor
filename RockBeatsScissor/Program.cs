@@ -67,10 +67,10 @@ void Play()
     int secondHand = ChooseOptions(gameOptions);
 
     // Guardando as opções em um array
-    Dictionary<string, int> playerOptions = new Dictionary<string, int>
+    List<KeyValuePair<string, int>> playerOptions =  new List<KeyValuePair<string, int>>
     {
-        {gameOptions[firstHand - 1], firstHand},
-        {gameOptions[secondHand - 1], secondHand}
+        new KeyValuePair<string, int>(gameOptions[firstHand - 1], 1),
+        new KeyValuePair<string, int>(gameOptions[secondHand - 1], 2)
     };
 
     // Escolhendo as opções da mão 1 e 2 do programa
@@ -78,29 +78,29 @@ void Play()
     int pcSecondHand = new Random().Next(3);
 
     // Guardando as opções do programa em um array
-    Dictionary<string, int> pcOptions = new Dictionary<string, int>
+    List<KeyValuePair<string, int>> pcOptions = new List<KeyValuePair<string, int>>
     {
-        {gameOptions[pcFirstHand], pcFirstHand + 1},
-        {gameOptions[pcSecondHand], pcSecondHand + 1}
+        new KeyValuePair<string, int>(gameOptions[pcFirstHand], 1),
+        new KeyValuePair<string, int>(gameOptions[pcSecondHand], 2)
     };
 
     // Mostrando as opções das mãos 1 e 2 do programa e do jogador
-    ShowOptions(playerOptions.Keys.ToArray());
-    ShowOptions(pcOptions.Keys.ToArray(), true);
+    ShowOptions(playerOptions.Select(option => option.Key).ToArray());
+    ShowOptions(pcOptions.Select(option => option.Key).ToArray(), true);
 
     // Escolhendo a melhor opção para ganhar do programa
     Console.WriteLine("Escolha a sua melhor opção para ganhar de mim!");
-    int choice = ChooseOptions(playerOptions.Keys.ToArray());
+    int choice = ChooseOptions(playerOptions.Select(option => option.Key).ToArray());
 
     // Fazendo o programa escolher a melhor opção para ganhar do jogador
     int pcChoice = PcAvaliationOptions(playerOptions, pcOptions);
 
-    Console.WriteLine(playerOptions.FirstOrDefault(x => x.Value == choice).Key);
-    // Console.WriteLine(pcOptions.FirstOrDefault(x => x.Value == pcChoice).Key);
-    Console.WriteLine(pcChoice);
+
+    string choiceName = playerOptions.FirstOrDefault(x => x.Value == choice).Key.ToString();
+    Console.WriteLine(pcOptions.FirstOrDefault(x => x.Value == pcChoice).Key);
 }
 
-int PcAvaliationOptions(Dictionary<string, int> playerOptions, Dictionary<string, int> pcOptions)
+int PcAvaliationOptions(List<KeyValuePair<string, int>> playerOptions, List<KeyValuePair<string, int>> pcOptions)
 {
     Dictionary<string, string> rules = new Dictionary<string, string>
     {
@@ -108,22 +108,22 @@ int PcAvaliationOptions(Dictionary<string, int> playerOptions, Dictionary<string
         { "Papel", "Pedra"},
         { "Tesoura", "Papel"}
     };
-    foreach (string pcOption in pcOptions.Keys)
+    foreach (string pcOption in pcOptions.Select(option => option.Key).ToArray())
     {
-        foreach (string playerOption in playerOptions.Keys)
+        foreach (string playerOption in playerOptions.Select(option => option.Key).ToArray())
         {
             if (rules[pcOption] == playerOption)
             {
-                return pcOptions[pcOption];
+                return pcOptions.FirstOrDefault(option => option.Key == pcOption).Value;
             }
         }
     }
 
-    foreach (string pcOption in pcOptions.Keys)
+    foreach (string pcOption in pcOptions.Select(option => option.Key).ToArray())
     {
-        if (playerOptions.ContainsKey(pcOption))
+        if (playerOptions.Any(option => option.Key == pcOption))
         {
-            return pcOptions[pcOption];
+            return pcOptions.FirstOrDefault(option => option.Key == pcOption).Value;
         }
     }
     return new Random().Next(2);
