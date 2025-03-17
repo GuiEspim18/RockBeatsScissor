@@ -101,14 +101,6 @@ void PcAvaliationOptions(Dictionary<string, int>[] playerOptions, Dictionary<str
 {
    string[] player = playerOptions.SelectMany(dict => dict.Keys).ToArray();
    string[] pc = pcOptions.SelectMany(dict => dict.Keys).ToArray();
-
-   if (player[0] == pc[0]) 
-   {
-        // empate
-   } else if (player[0] == "Pedra" && pc[0] == "Papel") 
-   {
-        // vitória
-   }
 }
 
 void ShowOptions(string[] options, bool pc = false)
