@@ -1,5 +1,5 @@
 ﻿// Variável que guarda as estatísticas dos usuários
-Dictionary<string, (int, int, int)> statitics = new();
+Dictionary<string, (int victory, int draw, int defeat)> statitics = new();
 
 // Variável que guarda as opções do menu
 string[] mainMenu = new string[]{
@@ -48,6 +48,26 @@ void Welcome()
 
         // Fazer o usuário escolher uma nova opção
         option = ChooseOptions(mainMenu);
+    }
+}
+
+// Função para listar as estatísticas
+void ShowStatistics()
+{
+    // Se não houver usuários
+    if (statitics.Count == 0) {
+        Console.WriteLine("Nenhum usuário foi adicionado ainda!");
+    } else 
+    {
+        // Listando estatísticas
+        Console.WriteLine("--Estatísticas--");
+        foreach (string name in statitics.Keys) 
+        {
+            Console.WriteLine($"--{name}--");
+            Console.WriteLine($"Vitórias: {statitics[name].victory}");
+            Console.WriteLine($"Empates: {statitics[name].draw}");
+            Console.WriteLine($"Derrotas: {statitics[name].defeat}");
+        }
     }
 }
 
@@ -112,15 +132,18 @@ void Play()
     if (choiceName == pcOptions[pcChoice])
     {
         Console.WriteLine("Empatamos!");
+        statitics[user] = (statitics[user].victory, statitics[user].draw + 1, statitics[user].defeat);
     } else // Se não
     {   
         // Se o player ganhar
         if (PlayerVictory(choiceName, pcChoiceName))
         {
             Console.WriteLine("Você ganhou!");
+            statitics[user] = (statitics[user].victory + 1, statitics[user].draw, statitics[user].defeat);
         } else
         {
             Console.WriteLine("Eu ganhei!");
+            statitics[user] = (statitics[user].victory, statitics[user].draw, statitics[user].defeat + 1);
         }
     }
 }
@@ -213,8 +236,8 @@ void Choice(int option)
         case 1: Tutorial(); break;
         case 2: Play(); break;
         case 3: AddUser(); break;
-        case 4: Console.WriteLine(""); break;
-        case 5: Console.WriteLine(""); break;
+        case 4: ShowStatistics(); break;
+        case 5: Console.WriteLine("Adeus!"); break;
     }
 }
 
