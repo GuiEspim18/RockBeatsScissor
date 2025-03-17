@@ -9,7 +9,7 @@ string[] mainMenu = new string[]{
 };
 string[] gameOptions = new string[]{
     "Pedra",
-    "Papel", 
+    "Papel",
     "Tesoura"
 };
 string user;
@@ -37,9 +37,43 @@ void Play()
     int firstHand = ChooseOptions(gameOptions);
     Console.WriteLine("Mão 2:");
     int secondHand = ChooseOptions(gameOptions);
+    string[] playerOptions = new string[] { gameOptions[firstHand - 1], gameOptions[secondHand - 1] };
+    int pcFirstHand = new Random().Next(3);
+    int pcSecondHand = new Random().Next(3);
+    string[] pcOptions = new string[] { gameOptions[pcFirstHand - 1], gameOptions[pcSecondHand - 1] };
+    ShowOptions(playerOptions);
+    ShowOptions(pcOptions, true);
+    Console.WriteLine("Escolha a sua melhor opção para ganhar de mim!");
+    int choice = ChooseOptions(new string[] { gameOptions[firstHand - 1], gameOptions[secondHand - 1] });
+    PcAvaliationOptions(playerOptions, pcOptions);
+
 }
 
-void ChooseUser() {
+void PcAvaliationOptions(string[] playerOptions, string[] pcOptions)
+{
+
+}
+
+void ShowOptions(string[] options, bool pc = false)
+{
+    if (!pc)
+    {
+        Console.WriteLine("As suas opções são:");
+    }
+    else
+    {
+        Console.WriteLine("As minhas opções são:");
+    }
+    int hand = 1;
+    foreach (string option in options)
+    {
+        Console.WriteLine($"Mão {hand} - {option}");
+        hand++;
+    }
+}
+
+void ChooseUser()
+{
     Console.WriteLine("Com qual usuário você quer jogar ?");
     string[] keys = statitics.Keys.ToArray();
     int option = ChooseOptions(keys);
