@@ -17,6 +17,14 @@ string[] gameOptions = new string[]{
     "Tesoura"
 };
 
+// Variável que guarda as regras do jogo
+Dictionary<string, string> rules = new Dictionary<string, string>
+{
+    { "Pedra", "Tesoura" },
+    { "Papel", "Pedra" },
+    { "Tesoura", "Papel" }
+};
+
 // Variável que guarda o usuário escolhido
 string user;
 
@@ -94,47 +102,80 @@ void Play()
     // Fazendo o programa escolher a melhor opção para ganhar do jogador
     int pcChoice = PcAvaliationOptions(playerOptions, pcOptions);
 
+    // Pegando o nome das opções que o player escolheu e o computador escolheu
     string choiceName = playerOptions[choice];
-    Console.WriteLine("Computador escolheu: " + pcOptions[pcChoice]);
+    string pcChoiceName = pcOptions[pcChoice];
+    Console.WriteLine($"Eu escolhi: {pcChoiceName}");
+
+    // Validando as opções
+    // Se forem iguals será empate
+    if (choiceName == pcOptions[pcChoice])
+    {
+        Console.WriteLine("Empatamos!");
+    } else // Se não
+    {   
+        // Se o player ganhar
+        if (PlayerVictory(choiceName, pcChoiceName))
+        {
+            Console.WriteLine("Você ganhou!");
+        } else
+        {
+            Console.WriteLine("Eu ganhei!");
+        }
+    }
 }
 
+// Função para verificar se o player venceu ou ganhou
+bool PlayerVictory(string playerChoice, string pcChoice)
+{
+    // Verificando se o player venceu
+    if (rules[playerChoice] == pcChoice)
+    {
+
+        // Returnar true se ele venceu
+        return true;
+    }
+    // Retornar false se ele não venceu
+    return false;
+}
+
+// Função para o algorítimo avaliar qual opção é a melhor
 int PcAvaliationOptions(Dictionary<int, string> playerOptions, Dictionary<int, string> pcOptions)
 {
-    // Regras do jogo: o que cada opção derrota
-    var rules = new Dictionary<string, string>
-    {
-        { "Pedra", "Tesoura" },
-        { "Papel", "Pedra" },
-        { "Tesoura", "Papel" }
-    };
-
-    // Verificar se o computador tem uma opção que vença a do jogador
+    // Percorrendo as opções que o algorítimo tem
     foreach (var pcOption in pcOptions.Values)
     {
+        // Percorrendo as opções que o player tem
         foreach (var playerOption in playerOptions.Values)
         {
+            // Verificando as possibilidades de vitória
             if (rules[pcOption] == playerOption)
             {
-                // Se o computador vencer, retorna a opção
+                // Retornando a opção que pode vencer o player
                 return pcOptions.FirstOrDefault(option => option.Value == pcOption).Key;
             }
         }
     }
 
-    // Se não houver uma vitória clara, o computador escolhe aleatoriamente
+    // Se não houver uma vitória clara, o algorítimo escolhe aleatoriamente
     return pcOptions.Keys.ElementAt(new Random().Next(pcOptions.Count));
 }
 
+
+// Função para mostrar as opções que tem em mãos
 void ShowOptions(string[] options, bool pc = false)
-{
+{   
+    // Se não for o pc
     if (!pc)
     {
         Console.WriteLine("As suas opções são:");
     }
-    else
+    else // Se não
     {
         Console.WriteLine("As minhas opções são:");
     }
+
+    // Mostrando as opções
     int hand = 1;
     foreach (string option in options)
     {
@@ -143,20 +184,28 @@ void ShowOptions(string[] options, bool pc = false)
     }
 }
 
+
+// Função para escolher o usuário para jogar
 void ChooseUser()
 {
     Console.WriteLine("Com qual usuário você quer jogar ?");
+
+    // Listando os usuários
     string[] keys = statitics.Keys.ToArray();
     int option = ChooseOptions(keys);
+
+    // Atribuindo à variável user o usuário escolhido
     user = keys[option - 1];
 }
 
+// Função para ensinar o player como funciona o jogo
 void Tutorial()
 {
     Console.WriteLine("--Tutorial--");
     Console.WriteLine("Cada jogador usa as duas mãos, jogando duas vezes (uma com cada mão) e recebendo valores de pedra, papel ou tesoura. Depois, escolhe um dos valores para enfrentar o adversário. O vencedor é decidido pelas regras tradicionais: pedra vence tesoura, tesoura vence papel e papel vence pedra.");
 }
 
+// Função para validar a opção escolhida
 void Choice(int option)
 {
     switch (option)
@@ -169,21 +218,32 @@ void Choice(int option)
     }
 }
 
+// Função para adicionar o usuário
 void AddUser()
 {
-    Console.WriteLine("Digite o seu nome:");
+    Console.WriteLine("--Adicionar Usuário--");
+
+    // Pegando o nome do usuário
     string name = GetName();
+
+    // Caso o usuário existir
     while (statitics.ContainsKey(name))
     {
         Console.WriteLine("Este usuário já foi adicionado!");
         name = GetName();
     }
+
+    // Adicionar usuário
     statitics.Add(name, (0, 0, 0));
 }
 
+// Função que imprime um menu para escolher as opções
 int ChooseOptions(string[] validOptions)
 {
+    // Criando a variável para guardar as opções
     Dictionary<int, string> options = new();
+
+    // Percorrendo todas as opções passadas para adicionar à variável de opções
     int number = 0;
     foreach (string opt in validOptions)
     {
@@ -191,8 +251,12 @@ int ChooseOptions(string[] validOptions)
         Console.WriteLine($"({number}) {opt}");
     }
     Console.WriteLine("Escolha uma opção:");
+
+    // Escolhendo uma opçâo
     string? option = Console.ReadKey().KeyChar.ToString();
     Console.WriteLine();
+
+    // Validando se a opção é válida
     bool valid = ValidateOpt(option, number);
     while (!valid)
     {
@@ -201,14 +265,20 @@ int ChooseOptions(string[] validOptions)
         Console.WriteLine();
         valid = ValidateOpt(option, number);
     }
+
+    // retornando a opção escolhida
     return int.Parse(option);
 
 }
 
+
+// Função para validar a opção
 bool ValidateOpt(string option, int max)
 {
+    // Se a opção não for nula
     if (option != null)
     {
+        // Verificando se a opção está dentro das passadas
         int numOpt = int.Parse(option);
         if (numOpt > 0 && numOpt <= max)
         {
@@ -218,11 +288,16 @@ bool ValidateOpt(string option, int max)
     return false;
 }
 
+// Função para pegar o nome do usuário
 string GetName()
 {
     Console.WriteLine("Qual o seu nome?");
+
+    // Lendo o nome
     string? name = Console.ReadLine();
     Console.WriteLine();
+
+    // Se o nome for nulo
     while (name == null)
     {
         Console.WriteLine("Seu nome não pode ser nulo!");

@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "1FteXMLcaJQgipa//bu/lCHLRre9F6YrsHOOBTS+3LVE2IU034dq5VX4OPXjUN0A2Aykn5p1n0Vxgj/9gj8QUw==",
+  "dgSpecHash": "ZCFi0u0Pdfw=",
   "success": true,
-  "projectFilePath": "/Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/RockBeatsScissor.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\6128094\\OneDrive - Thomson Reuters Incorporated\\Desktop\\RockBeatsScissor\\RockBeatsScissor\\RockBeatsScissor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\6128094\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\6128094\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\6128094\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\6128094\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.20\\microsoft.netcore.app.host.win-x64.7.0.20.nupkg.sha512"
+  ],
   "logs": []
 }
