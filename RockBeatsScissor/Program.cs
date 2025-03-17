@@ -1,5 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿// Variável que guarda as estatísticas dos usuários
 Dictionary<string, (int, int, int)> statitics = new();
+
+// Variável que guarda as opções do menu
 string[] mainMenu = new string[]{
         "Tutorial",
         "Jogar Agora",
@@ -7,49 +9,95 @@ string[] mainMenu = new string[]{
         "Estatísticas",
         "Sair"
 };
+
+// Variável que guarda as opções de jogo
 string[] gameOptions = new string[]{
     "Pedra",
     "Papel",
     "Tesoura"
 };
+
+// Variável que guarda o usuário escolhido
 string user;
 
+
+// Função que inicia o programa
 void Welcome()
 {
+    Console.Clear();
+    
+    // Imprimindo o nome do programa
     Console.WriteLine("--Pedra, Papel e Tesoura--");
+
+    // Fazendo o usuário escolher as opções do menu
     int option = ChooseOptions(mainMenu);
+
+    // Enquanto a opção não for a (5) Sair, continuar o programa
     while (option != 5)
     {
+        // Validar a opção para executar a função relacionada a ela
         Choice(option);
+
+        // Fazer o usuário escolher uma nova opção
         option = ChooseOptions(mainMenu);
     }
 }
 
+
+// Função para jogar o jogo
 void Play()
 {
+    Console.WriteLine("--Vamos jogar--");
+
+    // Se não houver nenhum usuário na base de dados do programa...
     if (statitics.Count == 0)
     {
+        // Adicione um novo usuário
         AddUser();
     }
-    Console.WriteLine("--Vamos jogar--");
+    
+
+    // Escolhendo um usuário para jogar
     ChooseUser();
+
+    // Escolhendo a opção da mão 1 e 2
     Console.WriteLine("Mão 1:");
     int firstHand = ChooseOptions(gameOptions);
     Console.WriteLine("Mão 2:");
     int secondHand = ChooseOptions(gameOptions);
-    string[] playerOptions = new string[] { gameOptions[firstHand - 1], gameOptions[secondHand - 1] };
+
+    // Guardando as opções em um array
+    Dictionary<string, int>[] playerOptions = new Dictionary<string, int>[]
+    {
+        new Dictionary<string, int> { { gameOptions[firstHand - 1], firstHand } },
+        new Dictionary<string, int>{ { gameOptions[secondHand - 1], secondHand} }
+    };
+
+    // Escolhendo as opções da mão 1 e 2 do programa
     int pcFirstHand = new Random().Next(3);
     int pcSecondHand = new Random().Next(3);
-    string[] pcOptions = new string[] { gameOptions[pcFirstHand - 1], gameOptions[pcSecondHand - 1] };
-    ShowOptions(playerOptions);
-    ShowOptions(pcOptions, true);
+
+    // Guardando as opções do programa em um array
+    Dictionary<string, int>[] pcOptions = new Dictionary<string, int>[]
+    {
+        new Dictionary<string, int> { { gameOptions[pcFirstHand], pcFirstHand + 1 } },
+        new Dictionary<string, int>{ { gameOptions[pcSecondHand], pcSecondHand + 1} }
+    };
+
+    // Mostrando as opções das mãos 1 e 2 do programa e do jogador
+    ShowOptions(playerOptions.SelectMany(dict => dict.Keys).ToArray());
+    ShowOptions(pcOptions.SelectMany(dict => dict.Keys).ToArray(), true);
+
+    // Escolhendo a melhor opção para ganhar do programa
     Console.WriteLine("Escolha a sua melhor opção para ganhar de mim!");
-    int choice = ChooseOptions(new string[] { gameOptions[firstHand - 1], gameOptions[secondHand - 1] });
+    int choice = ChooseOptions(playerOptions.SelectMany(dict => dict.Keys).ToArray());
+
+    // Fazendo o programa escolher a melhor opção para ganhar do jogador
     PcAvaliationOptions(playerOptions, pcOptions);
 
 }
 
-void PcAvaliationOptions(string[] playerOptions, string[] pcOptions)
+void PcAvaliationOptions(Dictionary<string, int>[] playerOptions, Dictionary<string, int>[] pcOptions)
 {
 
 }
