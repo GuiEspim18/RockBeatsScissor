@@ -7,11 +7,16 @@ string[] mainMenu = new string[]{
         "Estatísticas",
         "Sair"
 };
-string user = "";
+string[] gameOptions = new string[]{
+    "Pedra",
+    "Papel", 
+    "Tesoura"
+};
+string user;
 
 void Welcome()
 {
-    Console.WriteLine($"--Pedra, Papel e Tesoura--");
+    Console.WriteLine("--Pedra, Papel e Tesoura--");
     int option = ChooseOptions(mainMenu);
     while (option != 5)
     {
@@ -26,20 +31,24 @@ void Play()
     {
         AddUser();
     }
-    Console.WriteLine("\n--Vamos jogar--");
+    Console.WriteLine("--Vamos jogar--");
     ChooseUser();
+    Console.WriteLine("Mão 1:");
+    int firstHand = ChooseOptions(gameOptions);
+    Console.WriteLine("Mão 2:");
+    int secondHand = ChooseOptions(gameOptions);
 }
 
 void ChooseUser() {
     Console.WriteLine("Com qual usuário você quer jogar ?");
     string[] keys = statitics.Keys.ToArray();
     int option = ChooseOptions(keys);
-    Console.WriteLine(keys[option - 1]);
+    user = keys[option - 1];
 }
 
 void Tutorial()
 {
-    Console.WriteLine("\n--Tutorial--");
+    Console.WriteLine("--Tutorial--");
     Console.WriteLine("Cada jogador usa as duas mãos, jogando duas vezes (uma com cada mão) e recebendo valores de pedra, papel ou tesoura. Depois, escolhe um dos valores para enfrentar o adversário. O vencedor é decidido pelas regras tradicionais: pedra vence tesoura, tesoura vence papel e papel vence pedra.");
 }
 
@@ -78,11 +87,13 @@ int ChooseOptions(string[] validOptions)
     }
     Console.WriteLine("Escolha uma opção:");
     string? option = Console.ReadKey().KeyChar.ToString();
+    Console.WriteLine();
     bool valid = ValidateOpt(option, number);
     while (!valid)
     {
-        Console.WriteLine("\nOpção inválida:");
+        Console.WriteLine("Opção inválida:");
         option = Console.ReadKey().KeyChar.ToString();
+        Console.WriteLine();
         valid = ValidateOpt(option, number);
     }
     return int.Parse(option);
@@ -106,10 +117,12 @@ string GetName()
 {
     Console.WriteLine("Qual o seu nome?");
     string? name = Console.ReadLine();
+    Console.WriteLine();
     while (name == null)
     {
-        Console.WriteLine("\nSeu nome não pode ser nulo!");
+        Console.WriteLine("Seu nome não pode ser nulo!");
         name = Console.ReadLine();
+        Console.WriteLine();
     }
     return name;
 }
