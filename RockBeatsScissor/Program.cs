@@ -25,7 +25,7 @@ string user;
 void Welcome()
 {
     Console.Clear();
-    
+
     // Imprimindo o nome do programa
     Console.WriteLine("--Pedra, Papel e Tesoura--");
 
@@ -55,7 +55,7 @@ void Play()
         // Adicione um novo usuário
         AddUser();
     }
-    
+
 
     // Escolhendo um usuário para jogar
     ChooseUser();
@@ -67,10 +67,10 @@ void Play()
     int secondHand = ChooseOptions(gameOptions);
 
     // Guardando as opções em um array
-    Dictionary<string, int>[] playerOptions = new Dictionary<string, int>[]
+    Dictionary<string, int> playerOptions = new Dictionary<string, int>
     {
-        new Dictionary<string, int> { { gameOptions[firstHand - 1], firstHand } },
-        new Dictionary<string, int>{ { gameOptions[secondHand - 1], secondHand} }
+        {gameOptions[firstHand - 1], firstHand},
+        {gameOptions[secondHand - 1], secondHand}
     };
 
     // Escolhendo as opções da mão 1 e 2 do programa
@@ -78,29 +78,56 @@ void Play()
     int pcSecondHand = new Random().Next(3);
 
     // Guardando as opções do programa em um array
-    Dictionary<string, int>[] pcOptions = new Dictionary<string, int>[]
+    Dictionary<string, int> pcOptions = new Dictionary<string, int>
     {
-        new Dictionary<string, int> { { gameOptions[pcFirstHand], pcFirstHand + 1 } },
-        new Dictionary<string, int>{ { gameOptions[pcSecondHand], pcSecondHand + 1} }
+        {gameOptions[pcFirstHand], pcFirstHand + 1},
+        {gameOptions[pcSecondHand], pcSecondHand + 1}
     };
 
     // Mostrando as opções das mãos 1 e 2 do programa e do jogador
-    ShowOptions(playerOptions.SelectMany(dict => dict.Keys).ToArray());
-    ShowOptions(pcOptions.SelectMany(dict => dict.Keys).ToArray(), true);
+    ShowOptions(playerOptions.Keys.ToArray());
+    ShowOptions(pcOptions.Keys.ToArray(), true);
 
     // Escolhendo a melhor opção para ganhar do programa
     Console.WriteLine("Escolha a sua melhor opção para ganhar de mim!");
-    int choice = ChooseOptions(playerOptions.SelectMany(dict => dict.Keys).ToArray());
+    int choice = ChooseOptions(playerOptions.Keys.ToArray());
 
     // Fazendo o programa escolher a melhor opção para ganhar do jogador
-    PcAvaliationOptions(playerOptions, pcOptions);
+    int pcChoice = PcAvaliationOptions(playerOptions, pcOptions);
 
+    Console.WriteLine(playerOptions.FirstOrDefault(x => x.Value == choice).Key);
+    // Console.WriteLine(pcOptions.FirstOrDefault(x => x.Value == pcChoice).Key);
+    Console.WriteLine(pcChoice);
 }
 
-void PcAvaliationOptions(Dictionary<string, int>[] playerOptions, Dictionary<string, int>[] pcOptions)
+int PcAvaliationOptions(Dictionary<string, int> playerOptions, Dictionary<string, int> pcOptions)
 {
-   string[] player = playerOptions.SelectMany(dict => dict.Keys).ToArray();
-   string[] pc = pcOptions.SelectMany(dict => dict.Keys).ToArray();
+    Dictionary<string, string> rules = new Dictionary<string, string>
+    {
+        { "Pedra", "Tesoura"},
+        { "Papel", "Pedra"},
+        { "Tesoura", "Papel"}
+    };
+    foreach (string pcOption in pcOptions.Keys)
+    {
+        foreach (string playerOption in playerOptions.Keys)
+        {
+            if (rules[pcOption] == playerOption)
+            {
+                return pcOptions[pcOption];
+            }
+        }
+    }
+
+    foreach (string pcOption in pcOptions.Keys)
+    {
+        if (playerOptions.ContainsKey(pcOption))
+        {
+            return pcOptions[pcOption];
+        }
+    }
+    return new Random().Next(2);
+
 }
 
 void ShowOptions(string[] options, bool pc = false)

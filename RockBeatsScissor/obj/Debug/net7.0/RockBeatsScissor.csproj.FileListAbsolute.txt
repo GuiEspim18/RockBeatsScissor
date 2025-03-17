@@ -13,3 +13,18 @@
 /Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.pdb
 /Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/RockBeatsScissor.genruntimeconfig.cache
 /Users/guiespim/Documents/pasta-do-gui/csharp/RockBeatsScissor/RockBeatsScissor/obj/Debug/net7.0/ref/RockBeatsScissor.dll
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\bin\Debug\net7.0\RockBeatsScissor.exe
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\bin\Debug\net7.0\RockBeatsScissor.deps.json
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\bin\Debug\net7.0\RockBeatsScissor.runtimeconfig.json
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\bin\Debug\net7.0\RockBeatsScissor.dll
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\bin\Debug\net7.0\RockBeatsScissor.pdb
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\RockBeatsScissor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\RockBeatsScissor.AssemblyInfoInputs.cache
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\RockBeatsScissor.AssemblyInfo.cs
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\RockBeatsScissor.csproj.CoreCompileInputs.cache
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\RockBeatsScissor.sourcelink.json
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\RockBeatsScissor.dll
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\refint\RockBeatsScissor.dll
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\RockBeatsScissor.pdb
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\RockBeatsScissor.genruntimeconfig.cache
+C:\Users\6128094\OneDrive - Thomson Reuters Incorporated\Desktop\RockBeatsScissor\RockBeatsScissor\obj\Debug\net7.0\ref\RockBeatsScissor.dll
