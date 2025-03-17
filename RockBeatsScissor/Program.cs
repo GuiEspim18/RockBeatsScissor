@@ -63,6 +63,7 @@ void ShowStatistics()
         Console.WriteLine("--Estatísticas--");
         foreach (string name in statitics.Keys) 
         {
+            Console.WriteLine();
             Console.WriteLine($"--{name}--");
             Console.WriteLine($"Vitórias: {statitics[name].victory}");
             Console.WriteLine($"Empates: {statitics[name].draw}");
@@ -75,6 +76,7 @@ void ShowStatistics()
 // Função para jogar o jogo
 void Play()
 {
+    Console.WriteLine();
     Console.WriteLine("--Vamos jogar--");
 
     // Se não houver nenhum usuário na base de dados do programa...
@@ -188,6 +190,7 @@ int PcAvaliationOptions(Dictionary<int, string> playerOptions, Dictionary<int, s
 // Função para mostrar as opções que tem em mãos
 void ShowOptions(string[] options, bool pc = false)
 {   
+    Console.WriteLine();
     // Se não for o pc
     if (!pc)
     {
@@ -211,6 +214,7 @@ void ShowOptions(string[] options, bool pc = false)
 // Função para escolher o usuário para jogar
 void ChooseUser()
 {
+    Console.WriteLine();
     Console.WriteLine("Com qual usuário você quer jogar ?");
 
     // Listando os usuários
@@ -224,6 +228,7 @@ void ChooseUser()
 // Função para ensinar o player como funciona o jogo
 void Tutorial()
 {
+    Console.WriteLine();
     Console.WriteLine("--Tutorial--");
     Console.WriteLine("Cada jogador usa as duas mãos, jogando duas vezes (uma com cada mão) e recebendo valores de pedra, papel ou tesoura. Depois, escolhe um dos valores para enfrentar o adversário. O vencedor é decidido pelas regras tradicionais: pedra vence tesoura, tesoura vence papel e papel vence pedra.");
 }
@@ -244,6 +249,7 @@ void Choice(int option)
 // Função para adicionar o usuário
 void AddUser()
 {
+    Console.WriteLine();
     Console.WriteLine("--Adicionar Usuário--");
 
     // Pegando o nome do usuário
@@ -263,6 +269,7 @@ void AddUser()
 // Função que imprime um menu para escolher as opções
 int ChooseOptions(string[] validOptions)
 {
+    Console.WriteLine();
     // Criando a variável para guardar as opções
     Dictionary<int, string> options = new();
 
