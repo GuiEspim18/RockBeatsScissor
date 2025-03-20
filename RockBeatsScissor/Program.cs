@@ -243,7 +243,9 @@ void ChooseUser()
     user = keys[option - 1];
 }
 
-// Função para ensinar o player como funciona o jogo
+/// <summary>
+/// Este método ensina o player como o jogo funciona
+/// </summary>
 void Tutorial()
 {
     Console.WriteLine();
@@ -251,7 +253,9 @@ void Tutorial()
     Console.WriteLine("Cada jogador usa as duas mãos, jogando duas vezes (uma com cada mão) e recebendo valores de pedra, papel ou tesoura. Depois, escolhe um dos valores para enfrentar o adversário. O vencedor é decidido pelas regras tradicionais: pedra vence tesoura, tesoura vence papel e papel vence pedra.");
 }
 
-// Função para validar a opção escolhida
+/// <summary>
+/// Este método valida a opção escolhida e dependendo dela executa a função atrelada a ela
+/// <param name="option">Este parametro representa a opção</param>
 void Choice(int option)
 {
     switch (option)
@@ -264,7 +268,9 @@ void Choice(int option)
     }
 }
 
-// Função para adicionar o usuário
+///<summary>
+///Este método cadastra o funcionário no sistema
+///</summary>
 void AddUser()
 {
     Console.WriteLine();
@@ -284,7 +290,11 @@ void AddUser()
     statitics.Add(name, (0, 0, 0));
 }
 
-// Função que imprime um menu para escolher as opções
+/// <summary>
+/// Este método imprime o menu para escolher as opções
+/// </summary>
+/// <param name="validOptions">Este parametro representa as opções válidas para a validação da opção escolhida</param>
+/// <returns>Retorna a opção escolhida</returns>
 int ChooseOptions(string[] validOptions)
 {
     Console.WriteLine();
@@ -319,8 +329,12 @@ int ChooseOptions(string[] validOptions)
 
 }
 
-
-// Função para validar a opção
+/// <summary>
+/// Este método valalida a opção para ver se ela está dentro dos padrões
+/// </summary>
+/// <param name="option"> Este parametro é a opção escolhida para a validação </param>
+/// <param name="max"> Este parametro é a opção máxima e é usado para saber se a opção escolhida é maior que ele, se for a opção escolhida será inválida </param>
+/// <returns>retorna o valor da análise, se for true a opção é válida, se for false a opção é inválida</returns>
 bool ValidateOpt(string option, int max)
 {
     // Se a opção não for nula
@@ -336,7 +350,10 @@ bool ValidateOpt(string option, int max)
     return false;
 }
 
-// Função para pegar o nome do usuário
+/// <summary>
+/// Este método pega o nome do usuário e valida para ver se ele está dentro dos padrões
+/// </summary>
+/// <returns> Este método retornará o nome digitado </returns>
 string GetName()
 {
     Console.WriteLine("Qual o seu nome?");
@@ -355,4 +372,5 @@ string GetName()
     return name;
 }
 
+// Inicializando o programa
 Welcome();
