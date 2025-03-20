@@ -74,13 +74,36 @@ void ShowRanking()
         // Listando estatísticas
         Console.WriteLine();
         Console.WriteLine("🏆 Ranking 🏆");
-        foreach (string name in users.Keys) 
+
+        int pointsPerVictory = 3;
+        int pointsPerDraw = 1;
+        int pointsPerDefeat = 0;
+
+        var ranking = users
+            .Select(user => new {
+                Name = user.Key,
+                Score = (user.Value.victory * pointsPerVictory) + (user.Value.draw * pointsPerDraw) + (user.Value.defeat * pointsPerDefeat)
+            })
+            .OrderByDescending(user => user.Score)
+            .ToList();
+
+        int position = 1;
+        foreach (var user in ranking) 
         {
-            Console.WriteLine();
-            Console.WriteLine($"👤 {name}");
-            Console.WriteLine($"Vitórias: {users[name].victory}");
-            Console.WriteLine($"Empates: {users[name].draw}");
-            Console.WriteLine($"Derrotas: {users[name].defeat}");
+            string message = "";
+            string unity = "ponto";
+            switch (position) {
+                case 1:  message += "🥇"; break;
+                case 2:  message += "🥈"; break;
+                case 3:  message += "🥉"; break;
+                default: message += position; break;
+            }
+            if (user.Score > 1) {
+                unity = "pontos";
+            }
+            message += $" {user.Name}: {user.Score} {unity}";
+            Console.WriteLine(message);
+            position++;
         }
     }
 }
