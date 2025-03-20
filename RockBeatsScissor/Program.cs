@@ -28,8 +28,9 @@ Dictionary<string, string> rules = new Dictionary<string, string>
 // Variável que guarda o usuário escolhido
 string user;
 
-
-// Função que inicia o programa
+/// <summary>
+/// Este método inicializa o programa sendo o método principal
+/// </summary>
 void Welcome()
 {
     Console.Clear();
@@ -50,8 +51,9 @@ void Welcome()
         option = ChooseOptions(mainMenu);
     }
 }
-
-// Função para listar as estatísticas
+/// <summary>
+/// Este método lista as estatísitcas
+/// </summary>
 void ShowStatistics()
 {
     // Se não houver usuários
@@ -73,7 +75,9 @@ void ShowStatistics()
 }
 
 
-// Função para jogar o jogo
+/// <summary>
+/// Este método inicializa a partida do jogo
+/// </summary>
 void Play()
 {
     Console.WriteLine();
@@ -150,7 +154,12 @@ void Play()
     }
 }
 
-// Função para verificar se o player venceu ou ganhou
+/// <summary>
+/// Este método verifica se o plaver venceu a partida
+/// </summary>
+/// <param name="playerChoice">Escolha do jogador</param>
+/// <param name="pcChoice">Escolha do jogador</param>
+/// <returns>O resultado da análise se o player venceu a partida</returns>
 bool PlayerVictory(string playerChoice, string pcChoice)
 {
     // Verificando se o player venceu
@@ -164,7 +173,12 @@ bool PlayerVictory(string playerChoice, string pcChoice)
     return false;
 }
 
-// Função para o algorítimo avaliar qual opção é a melhor
+/// <summary>
+/// Este método é o algorítimo para avaliar qual é a melhor opção de escolha
+/// </summary>
+/// <param name="playerOptions">Opções de escolhas do jogador</param>
+/// <param name="pcOptions">Opções de escolhar do algorítimo</param>
+/// <returns>Retorna a melhor escolha que o algorítimo decidiu</returns>
 int PcAvaliationOptions(Dictionary<int, string> playerOptions, Dictionary<int, string> pcOptions)
 {
     // Percorrendo as opções que o algorítimo tem
@@ -186,8 +200,11 @@ int PcAvaliationOptions(Dictionary<int, string> playerOptions, Dictionary<int, s
     return pcOptions.Keys.ElementAt(new Random().Next(pcOptions.Count));
 }
 
-
-// Função para mostrar as opções que tem em mãos
+/// <summary>
+/// Este método mostra as opções que tem em mãos
+/// <summary/>
+/// <param name="options">Opções para listar</param>
+/// <param name="pc">Este parametro marca se estamos listando as opções para o computador ou para o usuário</param>
 void ShowOptions(string[] options, bool pc = false)
 {   
     Console.WriteLine();
@@ -210,8 +227,9 @@ void ShowOptions(string[] options, bool pc = false)
     }
 }
 
-
-// Função para escolher o usuário para jogar
+/// <summary>
+/// Este método possibilita escolher o usuário para jogar
+/// <summary/>
 void ChooseUser()
 {
     Console.WriteLine();
