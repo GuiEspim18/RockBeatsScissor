@@ -71,14 +71,16 @@ void ShowRanking()
         Console.WriteLine("Nenhum usuário foi adicionado ainda!");
     } else 
     {
-        // Listando estatísticas
+        // Imprimindo o título
         Console.WriteLine();
         Console.WriteLine("🏆 Ranking 🏆");
 
+        // Definindo os pontos por vitória, empate e derrota
         int pointsPerVictory = 3;
         int pointsPerDraw = 1;
         int pointsPerDefeat = 0;
 
+        // Ranqueando os usuários somando os pontos e colocando em cordem decrescente por pontuação
         var ranking = users
             .Select(user => new {
                 Name = user.Key,
@@ -87,22 +89,34 @@ void ShowRanking()
             .OrderByDescending(user => user.Score)
             .ToList();
 
+        // ´Percorrendo todos os usuários e imprimindo o ranking
         int position = 1;
         foreach (var user in ranking) 
         {
+            // Definindo a variável de mensagem para montar uma string em uma linha
             string message = "";
+
+            // Definindo a unidade de pontos
             string unity = "ponto";
+
+            // Definindo os emojis do ranking
             switch (position) {
                 case 1:  message += "🥇"; break;
                 case 2:  message += "🥈"; break;
                 case 3:  message += "🥉"; break;
                 default: message += position; break;
             }
+
+            // Verificando se a pontuação é maior que 1 para mudar a unidade para pontos
             if (user.Score > 1) {
                 unity = "pontos";
             }
+
+            // montando a mensagem que será mostrada
             message += $" {user.Name}: {user.Score} {unity}";
             Console.WriteLine(message);
+
+            // Passando para a próxima posição
             position++;
         }
     }
