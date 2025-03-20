@@ -3,11 +3,11 @@ Dictionary<string, (int victory, int draw, int defeat)> statitics = new();
 
 // Variável que guarda as opções do menu
 string[] mainMenu = new string[]{
-        "Tutorial",
-        "Jogar Agora",
-        "Adicionar Usuário",
-        "Estatísticas",
-        "Sair"
+        "📖 Tutorial",
+        "🎮 Jogar Agora",
+        "📃 Adicionar Usuário",
+        "🏆 Estatísticas",
+        "↖️ Sair"
 };
 
 // Variável que guarda as opções de jogo
@@ -28,6 +28,7 @@ Dictionary<string, string> rules = new Dictionary<string, string>
 // Variável que guarda o usuário escolhido
 string user;
 
+
 /// <summary>
 /// Este método inicializa o programa sendo o método principal
 /// </summary>
@@ -36,7 +37,14 @@ void Welcome()
     Console.Clear();
 
     // Imprimindo o nome do programa
-    Console.WriteLine("--Pedra, Papel e Tesoura--");
+    Console.WriteLine("""
+       ___         _                 ___                 _          _____                                
+      / _ \___  __| |_ __ __ _      / _ \__ _ _ __   ___| |   ___  /__   \___  ___  ___  _   _ _ __ __ _ 
+     / /_)/ _ \/ _` | '__/ _` |    / /_)/ _` | '_ \ / _ \ |  / _ \   / /\/ _ \/ __|/ _ \| | | | '__/ _` |
+    / ___/  __/ (_| | | | (_| |_  / ___/ (_| | |_) |  __/ | |  __/  / / |  __/\__ \ (_) | |_| | | | (_| |
+    \/    \___|\__,_|_|  \__,_( ) \/    \__,_| .__/ \___|_|  \___|  \/   \___||___/\___/ \__,_|_|  \__,_|
+                              |/             |_|                                                         
+    """);
 
     // Fazendo o usuário escolher as opções do menu
     int option = ChooseOptions(mainMenu);
@@ -51,6 +59,8 @@ void Welcome()
         option = ChooseOptions(mainMenu);
     }
 }
+
+
 /// <summary>
 /// Este método lista as estatísitcas
 /// </summary>
@@ -62,7 +72,7 @@ void ShowStatistics()
     } else 
     {
         // Listando estatísticas
-        Console.WriteLine("--Estatísticas--");
+        Console.WriteLine("🏆 Estatísticas 🏆");
         foreach (string name in statitics.Keys) 
         {
             Console.WriteLine();
@@ -81,7 +91,7 @@ void ShowStatistics()
 void Play()
 {
     Console.WriteLine();
-    Console.WriteLine("--Vamos jogar--");
+    Console.WriteLine("🎮 Vamos jogar 🎮");
 
     // Se não houver nenhum usuário na base de dados do programa...
     if (statitics.Count == 0)
@@ -131,7 +141,8 @@ void Play()
     // Pegando o nome das opções que o player escolheu e o computador escolheu
     string choiceName = playerOptions[choice];
     string pcChoiceName = pcOptions[pcChoice];
-    Console.WriteLine($"Eu escolhi: {pcChoiceName}");
+    Console.WriteLine($"Você escolheu: {GetEmoji(choiceName)} {choiceName}");
+    Console.WriteLine($"Eu escolhi: {GetEmoji(pcChoiceName)} {pcChoiceName}");
 
     // Validando as opções
     // Se forem iguals será empate
@@ -154,6 +165,23 @@ void Play()
     }
 }
 
+
+/// <summary>
+/// Este método retorna o emoji de acordo com a opção passada
+/// </summary>
+/// <param name="opt"> Este parametro representa a opção escolhida</param>
+/// <returns>Retorna uma string com o emoji</returns>
+string GetEmoji(string opt) 
+{
+    switch (opt) {
+        case "Pedra": return "✊";
+        case "Papel": return "✋";
+        case "Tesoura": return "✌️";
+        default: return "";
+    }
+}
+
+
 /// <summary>
 /// Este método verifica se o plaver venceu a partida
 /// </summary>
@@ -172,6 +200,7 @@ bool PlayerVictory(string playerChoice, string pcChoice)
     // Retornar false se ele não venceu
     return false;
 }
+
 
 /// <summary>
 /// Este método é o algorítimo para avaliar qual é a melhor opção de escolha
@@ -200,6 +229,7 @@ int PcAvaliationOptions(Dictionary<int, string> playerOptions, Dictionary<int, s
     return pcOptions.Keys.ElementAt(new Random().Next(pcOptions.Count));
 }
 
+
 /// <summary>
 /// Este método mostra as opções que tem em mãos
 /// <summary/>
@@ -211,21 +241,22 @@ void ShowOptions(string[] options, bool pc = false)
     // Se não for o pc
     if (!pc)
     {
-        Console.WriteLine("As suas opções são:");
+        Console.WriteLine("Suas opções são:");
     }
     else // Se não
     {
-        Console.WriteLine("As minhas opções são:");
+        Console.WriteLine("Minhas opções são:");
     }
 
     // Mostrando as opções
     int hand = 1;
     foreach (string option in options)
-    {
-        Console.WriteLine($"Mão {hand} - {option}");
+    {       
+        Console.WriteLine($"Mão {hand} - {GetEmoji(option)} {option}");
         hand++;
     }
 }
+
 
 /// <summary>
 /// Este método possibilita escolher o usuário para jogar
@@ -243,15 +274,17 @@ void ChooseUser()
     user = keys[option - 1];
 }
 
+
 /// <summary>
 /// Este método ensina o player como o jogo funciona
 /// </summary>
 void Tutorial()
 {
     Console.WriteLine();
-    Console.WriteLine("--Tutorial--");
+    Console.WriteLine("📖 Tutorial 📖");
     Console.WriteLine("Cada jogador usa as duas mãos, jogando duas vezes (uma com cada mão) e recebendo valores de pedra, papel ou tesoura. Depois, escolhe um dos valores para enfrentar o adversário. O vencedor é decidido pelas regras tradicionais: pedra vence tesoura, tesoura vence papel e papel vence pedra.");
 }
+
 
 /// <summary>
 /// Este método valida a opção escolhida e dependendo dela executa a função atrelada a ela
@@ -268,13 +301,14 @@ void Choice(int option)
     }
 }
 
+
 ///<summary>
 ///Este método cadastra o funcionário no sistema
 ///</summary>
 void AddUser()
 {
     Console.WriteLine();
-    Console.WriteLine("--Adicionar Usuário--");
+    Console.WriteLine("📃 Adicionar Usuário 📃");
 
     // Pegando o nome do usuário
     string name = GetName();
@@ -289,6 +323,7 @@ void AddUser()
     // Adicionar usuário
     statitics.Add(name, (0, 0, 0));
 }
+
 
 /// <summary>
 /// Este método imprime o menu para escolher as opções
@@ -306,7 +341,7 @@ int ChooseOptions(string[] validOptions)
     foreach (string opt in validOptions)
     {
         options.Add(number++, opt);
-        Console.WriteLine($"({number}) {opt}");
+        Console.WriteLine($"({number}) {GetEmoji(opt)} {opt}");
     }
     Console.WriteLine("Escolha uma opção:");
 
@@ -329,6 +364,7 @@ int ChooseOptions(string[] validOptions)
 
 }
 
+
 /// <summary>
 /// Este método valalida a opção para ver se ela está dentro dos padrões
 /// </summary>
@@ -349,6 +385,7 @@ bool ValidateOpt(string option, int max)
     }
     return false;
 }
+
 
 /// <summary>
 /// Este método pega o nome do usuário e valida para ver se ele está dentro dos padrões
@@ -371,6 +408,7 @@ string GetName()
     }
     return name;
 }
+
 
 // Inicializando o programa
 Welcome();
