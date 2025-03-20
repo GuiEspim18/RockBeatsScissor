@@ -1,12 +1,12 @@
 ﻿// Variável que guarda as estatísticas dos usuários
-Dictionary<string, (int victory, int draw, int defeat)> statitics = new();
+Dictionary<string, (int victory, int draw, int defeat)> users = new();
 
 // Variável que guarda as opções do menu
 string[] mainMenu = new string[]{
         "📖 Tutorial",
         "🎮 Jogar Agora",
         "📃 Adicionar Usuário",
-        "🏆 Estatísticas",
+        "🏆 Ranking",
         "↖️ Sair"
 };
 
@@ -62,24 +62,25 @@ void Welcome()
 
 
 /// <summary>
-/// Este método lista as estatísitcas
+/// Este método lista ao ranking de usuários
 /// </summary>
-void ShowStatistics()
+void ShowRanking()
 {
     // Se não houver usuários
-    if (statitics.Count == 0) {
+    if (users.Count == 0) {
         Console.WriteLine("Nenhum usuário foi adicionado ainda!");
     } else 
     {
         // Listando estatísticas
-        Console.WriteLine("🏆 Estatísticas 🏆");
-        foreach (string name in statitics.Keys) 
+        Console.WriteLine();
+        Console.WriteLine("🏆 Ranking 🏆");
+        foreach (string name in users.Keys) 
         {
             Console.WriteLine();
-            Console.WriteLine($"--{name}--");
-            Console.WriteLine($"Vitórias: {statitics[name].victory}");
-            Console.WriteLine($"Empates: {statitics[name].draw}");
-            Console.WriteLine($"Derrotas: {statitics[name].defeat}");
+            Console.WriteLine($"👤 {name}");
+            Console.WriteLine($"Vitórias: {users[name].victory}");
+            Console.WriteLine($"Empates: {users[name].draw}");
+            Console.WriteLine($"Derrotas: {users[name].defeat}");
         }
     }
 }
@@ -94,7 +95,7 @@ void Play()
     Console.WriteLine("🎮 Vamos jogar 🎮");
 
     // Se não houver nenhum usuário na base de dados do programa...
-    if (statitics.Count == 0)
+    if (users.Count == 0)
     {
         // Adicione um novo usuário
         AddUser();
@@ -149,18 +150,18 @@ void Play()
     if (choiceName == pcOptions[pcChoice])
     {
         Console.WriteLine("Empatamos!");
-        statitics[user] = (statitics[user].victory, statitics[user].draw + 1, statitics[user].defeat);
+        users[user] = (users[user].victory, users[user].draw + 1, users[user].defeat);
     } else // Se não
     {   
         // Se o player ganhar
         if (PlayerVictory(choiceName, pcChoiceName))
         {
             Console.WriteLine("Você ganhou!");
-            statitics[user] = (statitics[user].victory + 1, statitics[user].draw, statitics[user].defeat);
+            users[user] = (users[user].victory + 1, users[user].draw, users[user].defeat);
         } else
         {
             Console.WriteLine("Eu ganhei!");
-            statitics[user] = (statitics[user].victory, statitics[user].draw, statitics[user].defeat + 1);
+            users[user] = (users[user].victory, users[user].draw, users[user].defeat + 1);
         }
     }
 }
@@ -267,7 +268,7 @@ void ChooseUser()
     Console.WriteLine("Com qual usuário você quer jogar ?");
 
     // Listando os usuários
-    string[] keys = statitics.Keys.ToArray();
+    string[] keys = users.Keys.ToArray();
     int option = ChooseOptions(keys);
 
     // Atribuindo à variável user o usuário escolhido
@@ -296,7 +297,7 @@ void Choice(int option)
         case 1: Tutorial(); break;
         case 2: Play(); break;
         case 3: AddUser(); break;
-        case 4: ShowStatistics(); break;
+        case 4: ShowRanking(); break;
         case 5: Console.WriteLine("Adeus!"); break;
     }
 }
@@ -314,14 +315,14 @@ void AddUser()
     string name = GetName();
 
     // Caso o usuário existir
-    while (statitics.ContainsKey(name))
+    while (users.ContainsKey(name))
     {
         Console.WriteLine("Este usuário já foi adicionado!");
         name = GetName();
     }
 
     // Adicionar usuário
-    statitics.Add(name, (0, 0, 0));
+    users.Add(name, (0, 0, 0));
 }
 
 
